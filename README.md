@@ -1,2 +1,3 @@
 # Algorithm_C_practice-
-C言語によるアルゴリズム
+
+頭が痛いよぉ。。。
