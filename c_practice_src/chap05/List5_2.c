@@ -4,9 +4,11 @@ int main(void)
 {
 	int i;
 	int v[5];
+	int cnt = 5;
 
-	for(i = 5; i >= 1; i--){
-		v[i] = i;
+	for(i = 0; i < 5; i++){
+		v[i] = cnt;
+		cnt--;
 	}
 
 	for(i = 0; i < 5; i++){

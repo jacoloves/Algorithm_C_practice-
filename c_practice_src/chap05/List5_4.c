@@ -5,9 +5,9 @@ int main(void)
 	int i;
 	int a[5] = {17, 23, 36};
 	int b[5];
-	int cnt = 1;
+	int cnt = 0;
 
-	for(i = 5; i > = 1; i--){
+	for(i = 4; i > = 0; i--){
 		b[cnt] = a[i];
 		cnt++;
 	}
