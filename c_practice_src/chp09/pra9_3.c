@@ -14,7 +14,7 @@ int main(void)
         printf("s[%d]:", i);
         scanf("%s", s[i]);
 
-        if(s[0] == "Paul"){
+        if(s[0] == "a"){
             printf("処理を中断する。\n");
             end_flg = 1;
             break;
