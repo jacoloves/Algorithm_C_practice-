@@ -5,9 +5,9 @@ int str_chnum(const char *s, int c);
 int main(void)
 {
     char *moji = "test";
-    char a = 't';
+    char a[10] = "t";
 
-    printf("検索文字は%dです。\n", str_chnum(moji, a));
+    printf("検索文字は%d個です。\n", str_chnum(moji, a[0]));
 
     return 0;
 }
