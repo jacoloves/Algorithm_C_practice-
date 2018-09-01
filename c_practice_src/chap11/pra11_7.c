@@ -26,6 +26,9 @@ void del_digit(char *s)
             *str2 = *s;
         }
         i++;
-        *str2++;
+        *(str2+i);
     }
+
+    while()
+
 }
