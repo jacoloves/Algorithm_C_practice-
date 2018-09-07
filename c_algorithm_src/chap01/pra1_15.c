@@ -18,7 +18,7 @@ int main(void)
         scanf("%d", &n);
     }while(n <= 0);
 
-    triangleRB(n);
+    triangleRU(n);
 
     return 0;
 }
@@ -85,6 +85,5 @@ void triangleRB(int n)
 
         printf("\n");
         sum1--;
-        sum2++;
     }
 }
