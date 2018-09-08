@@ -18,7 +18,7 @@ int main(void)
         scanf("%d", &n);
     }while(n <= 0);
 
-    triangleRU(n);
+    triangleRB(n);
 
     return 0;
 }
