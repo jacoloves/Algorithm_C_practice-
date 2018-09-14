@@ -17,11 +17,10 @@ int search(const int a[], int n, int key)
     }
     printf("--");
     printf("\n");
-    printf("   |");
 
     while(1){
         //中段*
-        
+        printf("   |");
         for(int j = 0; j <= i; j++){
             printf("   ");
             if(j == i){
@@ -30,7 +29,6 @@ int search(const int a[], int n, int key)
                 printf(" ");
             }
         }
-        printf("   |\n");
 
         //中段数字
         printf("  %d|", i);
@@ -38,11 +36,14 @@ int search(const int a[], int n, int key)
             printf("   %d", a[j]);
         }
         printf("  \n");
+        
         if(i == n){
             return -1;
         }
         if(a[i] == key){
             return i;
+        }else{
+            printf("   |\n");
         }
         i++;
     }
