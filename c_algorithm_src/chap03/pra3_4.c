@@ -21,7 +21,45 @@ int bin_search(const int a[], int n, int key)
 
     do{
         pc = (pl + pr) / 2;
-        printf("   |\n");
+        printf("   |");
+        /*----矢印 MOD START----*/
+        int cnt = 0;
+        int tmp;
+        //<-
+        for(int i = 0; i <= pl; i++){
+            if(i == pl){
+                printf(" <- ");
+            }else{
+                printf("    ");
+            }
+            cnt++;
+        }
+
+        tmp = cnt;
+
+        //+
+        for(int i = tmp; i <= pc; i++){
+            if(i == pc){
+                printf("   +");
+            }else{
+                printf("    ");
+            }
+            cnt++;
+        }
+
+        tmp = cnt;
+
+        //->
+        for(int i = tmp; i <= pr; i++){
+            if(i == pr){
+                printf("  ->");
+            }else{
+                printf("    ");
+            }
+        }
+        printf("\n");
+
+        /*----矢印 MOD END----*/
         printf("  %d|", pc);
         for(int i = 0; i < n; i++){
             printf("   %d", a[i]);
