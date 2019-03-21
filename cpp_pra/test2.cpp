@@ -10,7 +10,8 @@ int main() {
 
     vector<int> vec = {A, B, C};
 
-    for (int i = 0; i < vec.size(); i++) {
-        cout << vec.at(i) << endl;
-    }
+    sort(vec.begin(), vec.end());
+
+    // 大きい数-小さい数を実施
+    cout << vec.at(2) - vec.at(0) << endl; 
 }
