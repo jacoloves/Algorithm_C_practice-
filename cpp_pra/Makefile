@@ -1,5 +1,5 @@
-sample1:
+pointa_pra1:
 
-sample2:
+pointa_pra2:
 
-vector_sample:
+pointa_pra3:
