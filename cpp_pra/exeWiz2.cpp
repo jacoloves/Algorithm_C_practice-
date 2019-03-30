@@ -1,25 +1,22 @@
 #include <iostream>
-#include <vector>
-#include <stdlib.h>
+#include <string>
 
 using namespace std;
 
 int main() {
-    int N;
-    cin >> N;
-    
-    char str;
+    int n;
+    cin >> n;
+    string s;
+    cin >> s;
+    int r = 0;
 
-    cin >> str;
-
-    int cntR = 0;
-    int cntB = 0;
-
-    
-
-    if (cntR > cntB) {
-        cout << "Yes" << endl;
-    } else {
-        cout << "No" << endl;
+    for (auto c : s) {
+        if (c == 'R') r++;
+        else r--;
     }
+
+    if (r > 0)
+        cout << "Yes" << endl;
+    else 
+        cout << "No" << endl;
 } 
