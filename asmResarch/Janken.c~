@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void main() {
+  
+  int human;
+
+  int prev = 0;
+
+  int memory[3][3] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
+
+  int max;
+
+  int counter = 0;
+
+  int computer;
+
+  srand(time(NULL)) ;
+
+  while (-1) {
+
+    printf("じゃんけん（0=グー、1=チョキ、2=パー、その他＝終了）...");
+
+    scanf("%d", &human);
+    printf("ぽん！\n");
+
+    if (human < 0 || human > 2) break;
+
+    counter++;
+
+    if (counter < 10) {
+      computer = rand() % 3;
+    } else {
+      max = 0;
+      if (memory[prev][max] < memory[prev][1]) max = 1;
+      if (memory[prev][max] < memoty[prev][2]) max = 2;
+      computer = (max + 2) % 3;
+    }
+
+    if (computer == 0) {
+      printf("コンピュータの手は「グー」です。\n");
+    } else if (computer == 1) {
+      printf("コンピュータの手は「チョキ」です。\n");
+    } else {
+      printf("コンピュータの手は「パー」です。\n");
+    }
+    printf("\n");
+
+    memory[prev][human]++;
+    prev = human;
+  }        
+}
+
+
+
+
+
+
+
