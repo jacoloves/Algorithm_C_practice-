@@ -1,9 +1,5 @@
-pointa_pra1:
+CXX = g++
 
-pointa_pra2:
+CXXFLAGS = -Wall -O2 -std=c++14
 
-pointa_pra3:
-
-samplePro:
-
-samplePro2:
+$@: $(CXX) $(CXXFLAGS) $@.cpp
