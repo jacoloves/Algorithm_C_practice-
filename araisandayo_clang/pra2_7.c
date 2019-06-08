@@ -47,12 +47,16 @@ int card_conv(unsigned x, int n, char d[])
     // 一度cno2に値を格納する。
     if (x == 0)
     {
+        
         cno2[digits++] = dchar[0];
     } else {
         while (x) {
+            printf("%3d |%5u  …%2c\n", n, x, dchar[x % n]);
+            printf("    +-------\n");
             cno2[digits++] = dchar[x % n];
             x /= n;
         }
+        printf("%10u\n", x);
     }
 
     // cno2[]からd[]に逆に詰め直す
