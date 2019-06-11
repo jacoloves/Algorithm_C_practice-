@@ -1,29 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int bin_search(const int a[], int n, int key)
+int front_search(const int a[], int pc, int key);
+
+int bin_search2(const int a[], int n, int key)
 {
     int pl = 0;
     int pr = n - 1;
     int pc;
 
-    printf("   |");
-    for (int i = 0; i < n; i++) 
-    {
-        printf("%4d", i);
-    }
-    printf("  \n");
-
-    
-
     do {
         pc = (pl + pr) / 2;
-        if (a[pc] == key)
+
+        if (a[pc] == key) {
+            pc = front_search(a, pc, key);
             return pc;
-        else if (a[pc] < key)
+        } else if (a[pc] < key)
             pl = pc + 1;
         else
             pr = pc - 1;
+        
     } while (pl <= pr);
 
     return -1;
@@ -53,7 +49,7 @@ int main(void)
     printf("探す値：");
     scanf("%d", &ky);
 
-    idx = bin_search(x, nx, ky);
+    idx = bin_search2(x, nx, ky);
 
     if (idx == -1)
         puts("探索に失敗しました。");
@@ -64,4 +60,21 @@ int main(void)
 
     return 0;
 
+}
+
+int front_search(const int a[], int pc, int key)
+{
+
+    int ans = pc;
+
+    for (int i = pc; i >= 1; i--)
+    {
+        if (a[i] == a[i - 1]) {
+            ans = i - 1;
+        } else {
+            break;
+        }
+    }
+
+    return ans;
 }
