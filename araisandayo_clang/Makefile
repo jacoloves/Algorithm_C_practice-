@@ -4,15 +4,25 @@ CFLAGS = -Wall -O2
 
 $@: $(C) $(CFLAGS) $@.c
 
-# stack用
-stack: pra4_1.o IntStack.o
-	gcc -Wall -O2 -o pra4_1 pra4_1.o IntStack.o
+# stack
+stack: pra4_2.o IntStack2.o
+	gcc -Wall -O2 -o pra4_2 pra4_2.o IntStack2.o
 
-pra4_1.o: pra4_1.c
-	gcc -c pra4_1.c
+pra4_2.o: pra4_2.c
+	gcc -c pra4_2.c
 
-IntStack.o: IntStack.c
-	gcc -c IntStack.c
+IntStack2.o: IntStack2.c
+	gcc -c IntStack2.c
+
+# Queue
+queue: pra4_3.o ArrayIntQueue.o
+	gcc -Wall -O2 -o pra4_3 pra4_3.o ArrayIntQueue.o
+
+pra4_3.o: pra4_3.c
+	gcc -c pra4_3.c
+
+ArrayIntQueue.o: ArrayIntQueue.c
+	gcc -c ArrayIntQueue.c
 
 
 
