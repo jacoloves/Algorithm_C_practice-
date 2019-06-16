@@ -15,14 +15,27 @@ IntStack2.o: IntStack2.c
 	gcc -c IntStack2.c
 
 # Queue
-queue: pra4_3.o ArrayIntQueue.o
-	gcc -Wall -O2 -o pra4_3 pra4_3.o ArrayIntQueue.o
+queue: pra4_4.o IntQueue.o
+	gcc -Wall -O2 -o pra4_4 pra4_4.o IntQueue.o
 
-pra4_3.o: pra4_3.c
-	gcc -c pra4_3.c
+pra4_4.o: pra4_4.c
+	gcc -c pra4_4.c
+IntQueue.o: IntQueue.c
+	gcc -c IntQueue.c
 
-ArrayIntQueue.o: ArrayIntQueue.c
-	gcc -c ArrayIntQueue.c
+# recur
+recur: pra5_4.o IntStack3.o
+	gcc -Wall -O2 -o pra5_4 pra5_4.o IntStack3.o
 
+pra5_4.o: pra5_4.c
+	gcc -c pra5_4.c
 
+IntStack3.o: IntStack3.c
+	gcc -c IntStack3.c
 
+# Hanoi
+hanoi: pra5_6.o IntStack3.o
+	gcc -Wall -O2 -o pra5_6 pra5_6.o IntStack3.o
+
+pra5_6.o: pra5_6.c
+	gcc -c pra5_6.c

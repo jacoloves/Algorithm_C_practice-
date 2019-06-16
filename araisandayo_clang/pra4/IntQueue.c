@@ -4,7 +4,7 @@
 
 int Initialize(IntQueue *q, int max)
 {
-    q->num = q->front = q->rear 0;
+    q->num = q->front = q->rear = 0;
     if ((q->que = calloc(max, sizeof(int))) == NULL) {
         q->max = 0;
         return -1;
@@ -78,7 +78,7 @@ int Search(const IntQueue *q, int x)
     int i, idx;
 
     for (i = 0; i < q->num; i++) {
-        if (q->que[idx = (i + q->front) % a->max] == x)
+        if (q->que[idx = (i + q->front) % q->max] == x)
             return idx;
     }
     return -1;
@@ -95,6 +95,21 @@ void Print(const IntQueue *q)
 void Terminate(IntQueue *q)
 {
     if (q->que != NULL)
-        free(q->que)
+        free(q->que);
     q->max = q->num = q->front = q->rear = 0;
+}
+
+int Search2(const IntQueue *q, int x)
+{
+    int idx;
+    int cnt = 0;
+
+    for (int i = 0; i < q->num; i++) {
+        if (q->que[idx = (i + q->front) % q->max] == x) {
+            return cnt;
+        }
+        cnt++;
+    }
+
+    return 99;
 }

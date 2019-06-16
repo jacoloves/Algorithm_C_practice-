@@ -31,4 +31,6 @@ void Print(const IntQueue *q);
 
 void Terminate(IntQueue *q);
 
+int Search2(const IntQueue *q, int x);
+
 #endif
