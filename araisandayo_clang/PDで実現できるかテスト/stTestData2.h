@@ -4,6 +4,6 @@
 
 typedef struct TESTD2 {
 	int Employee_Age;
-	char Busyo;
-	char Busyo_Chord;
+	char Busyo[10];
+	char Busyo_Chord[10];
 } sttest_data2;

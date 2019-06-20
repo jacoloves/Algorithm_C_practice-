@@ -2,8 +2,10 @@
 構造体サンプル
 */
 
+#include "stTestData2.h"
+
 typedef struct stTESTD {
-	struct TESTD2 sttest_data2; /* テスト用第二構造体
+	struct TESTD2 sttest_data2; 
 	char Employee_Name;
 	char Employee_Number;
 	int Number_Test;

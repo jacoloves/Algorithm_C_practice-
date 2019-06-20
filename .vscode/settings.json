@@ -6,6 +6,7 @@
         "vector": "cpp",
         "iostream": "cpp",
         "ostream": "cpp",
-        "ios": "c"
+        "ios": "c",
+        "bitset": "c"
     },
 }

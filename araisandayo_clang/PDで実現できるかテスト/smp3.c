@@ -18,14 +18,14 @@ void getArray(int *strNum, sdData *p);
 int main(void)
 {
 	int number = 10;
-	sdData *smpData;
+	sdData smpData;
 
-	getArray(&number, smpData);
+	getArray(&number, &smpData);
 
-	printf("%s\n", &smpData->test);
-	printf("%d\n", &smpData->num);
-	printf("%s\n", &smpData->beforedate);
-	printf("%s\n", &smpData->afterdate);
+	printf("%s\n", smpData.test);
+	printf("%d\n", smpData.num);
+	printf("%s\n", smpData.beforedate);
+	printf("%s\n", smpData.afterdate);
 	
 	return 0;
 }
@@ -33,8 +33,8 @@ int main(void)
 
 void getArray(int *strNum, sdData *p)
 {
-	strcpy(p->test, "1122334455");
+	strcpy(p->test, "112233445");
 	p->num = *strNum;
-	strcpy(p->beforedate, "20190612");
-	strcpy(p->afterdate, "20190712");
+	strcpy(p->beforedate, "201906");
+	strcpy(p->afterdate, "201907");
 }
