@@ -7,6 +7,12 @@
         "iostream": "cpp",
         "ostream": "cpp",
         "ios": "c",
-        "bitset": "c"
+        "bitset": "c",
+        "string": "cpp",
+        "string_view": "cpp",
+        "algorithm": "cpp",
+        "chrono": "cpp",
+        "limits": "cpp",
+        "ratio": "cpp"
     },
 }
