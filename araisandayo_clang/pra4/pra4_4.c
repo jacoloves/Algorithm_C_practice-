@@ -52,7 +52,7 @@ int main(void)
             case 7:
                 if (IsEmpty(&que)) {
                     puts("空です。");
-                } else if (IsFull(&que)) {
+                else if (IsFull(&que)) {
                     puts("満杯です。");
                 } else {
                     puts("空でも満杯でもありません。");
