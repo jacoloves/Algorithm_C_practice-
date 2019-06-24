@@ -1,48 +1,25 @@
 #include <iostream>
 #include <vector>
-
+#include <algorithm>
+#define rep(i, n) for (int i = 0; i < (n); i++)
 using namespace std;
-
-void bubble(int *p, int n);
-void swap(int *a, int *b);
+typedef long long ll;
+typedef pair<int, int> P;
 
 int main() {
-    int N;
-    int *x;
-    cin >> N;
-
-    vector<int> vec(N);
-    vector<int> data(N);
-    
-    x = (int *)malloc(sizeof(int) * N);
-
-    for (int i = 0; i < N; i++) {
-        cin >> vec.at(i) >> data.at(i);
-        x[i] = data.at(i) - vec.at(i);
-    }
-
-
-    bubble(x, N);
-
-    for (int i = 0; i < N; i++) {
-        cout << x[i] << endl;
-    }
-
-}
-
-void bubble(int *p, int n)
-{
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = n - 1; j > i; j--) {
-            if (p[j] < p[j - 1]) {
-                swap(p[j], p[j - 1]);
-            }
+    int n;
+    cin >> n;
+    vector<P> p(n);
+    rep(i,n) cin >> p[i].second >> p[i].first;
+    sort(p.begin(), p.end());
+    ll t = 0;
+    rep(i, n) {
+        t += p[i].second;
+        if (t > p[i].first) {
+            puts("No");
+            return 0;
         }
-    } 
-}
-
-void swap(int *a, int *b) {
-    int t = *a;
-    *a = *b;
-    *b = t;
+    }
+    puts("Yes");
+    return 0;
 }

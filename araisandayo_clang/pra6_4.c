@@ -1,17 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define swap(type, x, y) do { type t = x; x = y; y = t; } while (0)
+#define swap(type, x, y) do { type t = x; x = y; y = t; } while(0)
 
 void bubble(int a[], int n)
 {
     int i, j;
     int hikaku_cnt = 0, chg_cnt = 0;
     int tmp = 1;
-    for (i = 0; i < n -1; i++) {
+    for (i = 0; i < n - 1; i++) {
         printf("パス");
         printf("%d", tmp+i);
         printf(":\n");
+        int excng = 0;
         for (j = n - 1; j > i; j--) {
             printf("  ");
             for (int k = 0; k < n; k++) {
@@ -30,10 +31,12 @@ void bubble(int a[], int n)
             if (a[j - 1] > a[j]) {
                 chg_cnt++;
                 swap(int, a[j - 1], a[j]);
+                excng++;
             }
-            
         }
-        printf("  ");
+        if (excng == 0) {
+            break;
+        }
         for (int k = 0; k < n; k++) {
             printf("%4d", a[k]);
         }
@@ -52,7 +55,7 @@ int main(void)
     puts("単純交換ソート");
     printf("要素数：");
     scanf("%d", &nx);
-    x = calloc(nx, sizeof(int));
+    x = (int *)malloc(sizeof(x) * nx);
 
     for (i = 0; i < nx; i++) {
         printf("x[%d]:", i);

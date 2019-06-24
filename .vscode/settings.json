@@ -13,6 +13,17 @@
         "algorithm": "cpp",
         "chrono": "cpp",
         "limits": "cpp",
-        "ratio": "cpp"
+        "ratio": "cpp",
+        "__functional_base": "c",
+        "__functional_base_03": "c",
+        "__tuple": "c",
+        "functional": "c",
+        "memory": "c",
+        "tuple": "c",
+        "type_traits": "c",
+        "utility": "c",
+        "__bit_reference": "cpp",
+        "__split_buffer": "cpp",
+        "initializer_list": "cpp"
     },
 }
