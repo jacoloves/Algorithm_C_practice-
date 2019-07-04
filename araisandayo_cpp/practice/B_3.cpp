@@ -1,13 +1,12 @@
 #include <stdio.h>
-#include <isotream>
+#include <iostream>
 #include <vector>
 #include <algorithm>
-#icnlude <string>
+#include <string>
 
-#using namespace std;
+using namespace std;
 
-char in[120];
-pair<pair<string , int>, int> p[110]
+typedef pair<pair<string , int>, int> p[110];
 
 int main()
 {
@@ -15,13 +14,15 @@ int main()
 	for (int i = 0; i < a; i++)
 	{
 		int t; cin >> t;
-		cin >> in;
+		string tmp; cin >> tmp;
 		
-		string tmp = in;
 		p[i] = make_pair(make_pair(int, -t), i);
 	}
 	sort(p,p+a);
 	for (int i = 0; i < a; i++) {
 		printf("%d\n", p[i].second+1);
+		cout << p[i].second+1 << endl;
 	}
+	
+	return 0;
 } 
