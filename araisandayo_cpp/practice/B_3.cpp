@@ -1,28 +1,31 @@
-#include <stdio.h>
 #include <iostream>
-#include <vector>
 #include <algorithm>
+#include <vector>
 #include <string>
+#include <tuple>
 
 using namespace std;
 
-typedef pair<pair<string , int>, int> p[110];
-
 int main()
 {
-	int a; cin >> a;
-	for (int i = 0; i < a; i++)
-	{
-		int t; cin >> t;
-		string tmp; cin >> tmp;
-		
-		p[i] = make_pair(make_pair(int, -t), i);
+	int N;
+	cin >> N;
+	vector<tuple<string, int , int>> a;
+
+	for (int i = 1; i <= N; ++i) {
+		string s;
+		int p;
+
+		cin >> s >> p;
+
+		p = -p;
+
+		a.push_back(tie(s, p, i));
 	}
-	sort(p,p+a);
-	for (int i = 0; i < a; i++) {
-		printf("%d\n", p[i].second+1);
-		cout << p[i].second+1 << endl;
+
+	sort(a.begin(), a.end());
+
+	for (int i = 0; i < N; i++) {
+		cout << get<2>(a[i]) << endl;
 	}
-	
-	return 0;
-} 
+}
