@@ -39,3 +39,14 @@ hanoi: pra5_6.o IntStack3.o
 
 pra5_6.o: pra5_6.c
 	gcc -c pra5_6.c
+
+
+#quicksort
+qi: pra6_14.o IntStack.o
+	gcc -Wall -O2 -o pra6_14 pra6_14.o IntStack.o
+
+pra6_14.o: pra6_14.c
+	gcc -c pra6_14.c
+
+IntStack.o: IntStack.c
+	gcc -c IntStack.c
