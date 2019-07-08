@@ -50,3 +50,24 @@ pra6_14.o: pra6_14.c
 
 IntStack.o: IntStack.c
 	gcc -c IntStack.c
+
+#quick2
+qi2: pra6_16b.o IntStack.o
+	gcc -Wall -O2 -o pra6_16b pra6_16b.o IntStack.o
+
+pra6_16b.o: pra6_16b.c
+	gcc -c pra6_16b.c
+
+#quick3
+qi3: pra6_17b.o IntStack.o
+	gcc -Wall -O2 -o pra6_17b pra6_17b.o IntStack.o
+
+pra6_17b.o: pra6_17b.c
+	gcc -c pra6_17b.c
+
+#quick4
+qi4: pra6_18b.o IntStack.o
+	gcc -Wall -O2 -o qi4 pra6_18b.o IntStack.o
+
+pra6_18b.o: pra6_18b.c
+	gcc -c pra6_18b.c
