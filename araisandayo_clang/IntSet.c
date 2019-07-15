@@ -153,9 +153,118 @@ void Terminate(IntSet *s)
         free(s->set);
         s->max = s->num = 0;
     }
-}
+ }
 
+//拡張機能
 int IsFull(const IntSet *s) 
 {
     return s->num >= s->max;
 }
+
+void Clear(IntSet *s)
+{
+    s->num = 0;
+}
+
+IntSet *SymmetricDifference(IntSet *s1, const IntSet *s2, const IntSet *s3)
+{
+    s1->num = 0;
+    int cnt = 0;
+    for (int i = 0; i < s2->num; i++) {
+        for (int j = 0; j < s3->num; j++) {
+            if(s2->set[i] != s3->set[j]) {
+                cnt++;
+            }
+        }
+
+        if (cnt == s3->num - 1) {
+            Add(s1, s2->set[i]);
+        }
+    }
+
+    cnt = 0;
+    for (int i = 0; i < s3->num; i++) {
+        for (int j = 0; j < s2->num; j++) {
+            if(s3->set[i] != s2->set[j]) {
+                cnt++;
+            }
+        }
+
+        if (cnt == s2->num - 1) {
+            Add(s1, s3->set[i]);
+        }
+    }
+
+    return s1;
+}
+
+IntSet *ToUnion(IntSet *s1, const IntSet *s2)
+{
+    for (int i = 0; i < s2->num; i++) {
+        Add(s1, s2->set[i]);
+    }
+
+    return s1;
+}
+
+IntSet *ToIntersection(IntSet *s1, const IntSet *s2) 
+{
+    int cnt = 0;
+    for (int i = 0; i < s2->num; i++) {
+        for (int j = 0; j < s1->num; j++) {
+            if(s2->set[i] != s1->set[j]) {
+                cnt++;
+            }
+        }
+
+        if (cnt == s2->num - 1) {
+            Remove(&s1, s2->set[i]);
+        }
+    }
+
+    return s1;
+}
+
+IntSet *ToDifference(IntSet *s1, const IntSet *s2) 
+{
+    for (int i = 0; i < s2->num; i++) {
+        for (int j = 0; j < s1->num; j++) {
+            if(s2->set[i] == s1->set[j]) {
+                Add(s1, s2->set[i]);
+            }
+        }
+    }
+
+    return s1;
+}
+
+int IsSubset(const IntSet *s1, const IntSet *s2)
+{
+    int cnt = 0;
+    for (int i = 0; i < s2->num; i++) {
+        for (int j = 0; j < s1->num; j++) {
+            if(s2->set[i] == s1->set[j]) {
+                cnt++;
+            }
+        }
+    }
+
+    if (cnt == s1->num - 1) {
+        return 1;
+    } else {
+        retrun 0;
+    }
+}
+
+
+
+
+    
+
+
+
+
+
+
+
+
