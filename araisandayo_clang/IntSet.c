@@ -256,6 +256,26 @@ int IsSubset(const IntSet *s1, const IntSet *s2)
     }
 }
 
+int IsProperSubset(const IntSet *s1, const intSet *s2)
+{
+    int cnt = 0;
+    for (int i = 0; i < s2->num; i++) {
+        for (int j = 0; j < s1->num; j++) {
+            if(s2->set[i] == s1->set[j]) {
+                cnt++;
+            }
+        }
+    }
+
+    if (cnt == s1->num - 1) {
+        if (cnt < s2->num - 1) {
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
 
 
 
