@@ -65,3 +65,117 @@ void Add(SortedIntSet *s, int n)
     }
 }
 
+void Remove(SortedIntSet *s, int n)
+{
+    int i, idx, flag;
+
+    if (s->num > 0) {
+        idx = _search(s, n, &flag);
+        if (flag == 0) {
+            --s->num;
+            for (i = idx; i < s->num; i++) {
+                s->set[i] = s->set[i + i];
+            }
+        }
+    }
+}
+
+
+
+int Capacity(const SortedIntSet *s)
+{
+    return s->max;
+}
+
+int Size(const SortedIntSet *s) 
+{
+    return s->num;
+}
+
+void Assign(SortedIntSet *s1, const SortedIntSet *s2)
+{
+    int i;
+    int n = (s1->max < s2->num) ? s1->max : s2->num;
+
+    for (i = 0; i < n; i++) {
+        s1->set[i] = s2->set[i];
+    }
+    s1->num = n;
+}
+
+int Equal(const SortedIntSet *s1, const SortedIntSet *s2)
+{
+    int i;
+
+    if (Size(s1) != Size(s2)) {
+        return 0;
+    }
+
+    for (i = 0; i < s1->num; i++) {
+        if(s1->set[i] != s2->set[i]) {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
+SortedIntSet *Union(SortedIntSet *s1, const SortedIntSet *s2, const SortedIntSet *s3)
+{
+    int k2, k3;
+
+    s1->num = 0;
+
+    while(k2 < s2->num && k3 < s3->num) {
+        if (s2->set[k2] < s3->set[k3]) {
+            s1->set[s1->num++] = s2->set[k2++];
+        } else if (s2->set[k2] > s3->set[k3]) {
+            s1->set[s1->num++] = s3->set[k3++];
+        } else {
+            s1->set[s1->num++] = s2->set[k2++];
+            k3++;
+        }
+
+        if (s1->num == s1->max) return s1;
+    }
+
+    if (k2 < s2->num) {
+        while(k2 < s2->num && s1->num < s1->max) {
+            s1->sest[s1->num++] = s2->set[k2++];
+        }
+    } else {
+        while(k3 < s3->num && s1->num < s1->max) {
+            s1->set[s1->num++] = s3->set[k3++];
+        }
+    }
+
+    return s1;
+}
+
+SortedIntSet *Difference(SortedIntSet *s1, const SortedIntSet *s2, cosnt SortedIntSet *s3)
+{
+    int k2, k3;
+
+    s1->num = 0;
+    k2 = k3 = 0;
+    while (k2 < s2->num && k3 < s3->num) {
+        if (s2->set[k2] < s3->set[k3]) {
+            s1->set[s1->num++] = s2->set[k2++];
+        } else if (s2->set[k2] > s3->set[k3]) {
+            k3++;
+        } else {
+            k2++;
+            k3++;
+        }
+        if (s1->num == s1->max) return s1;
+    }
+
+    if (k2 < s2->num ) {
+        while(k2 < s2->num && s1->num < s1->max) {
+            s1->set[s1->num++] = s2->set[k2++];
+        }
+    }
+
+    return s1;
+}
+
