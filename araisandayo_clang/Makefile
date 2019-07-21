@@ -71,3 +71,13 @@ qi4: pra6_18b.o IntStack.o
 
 pra6_18b.o: pra6_18b.c
 	gcc -c pra6_18b.c
+
+#bit
+bit: BitSetTest.o BitSet.o
+	gcc -Wall -O2 -o bit BitSetTest.o BitSet.o
+
+BitSetTest.o: BitSetTest.c
+	gcc -c BitSetTest.c
+
+BitSet.o: BitSet.c
+	gcc -c BitSet.c

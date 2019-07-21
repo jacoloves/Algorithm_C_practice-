@@ -179,3 +179,132 @@ SortedIntSet *Difference(SortedIntSet *s1, const SortedIntSet *s2, cosnt SortedI
     return s1;
 }
 
+SortedIntSet *SymmetricDifference(SortedIntSet *s1, const SortedIntSet *s2, const SortedIntSet *s3)
+{
+    int k2, k3;
+
+    s1->num = 0;
+    k2 = k3 = 0;
+
+    while(k2 < s2->num && k3 < s3->num) {
+        if (s2->set[k2] < s3 -> set[k3] ){
+            s1->set[s1->num++] = s2->set[k2++];
+        } else if (s2->set[k2] > s3->set[k3]) {
+            s1->set[s1->num++] = s3->set[k3++];
+        } else {
+            k2++;
+            k3++;
+        }
+        if(s1->num == s1->max) return s1;
+    }
+
+    if (k2 < s2->num) {
+        while(k2 < s2->num && s1->num < s1->max) {
+            s1->set[s1->num++] = s2->set[k2++];
+        }
+    } else {
+        while(k3 < s3->num && s1->num < s1->max) {
+            s1->set[s1->num++] = s3->set[k3++];
+        }
+    }
+
+    return s1;
+}
+
+SortedIntSet *ToUnion(SortedIntSet *s1, const SortedIntSet *2)
+{
+    int i;
+
+    for (i = 0; i < s2->num; i++) {
+        Add(s1, s2->set[i]);
+    }
+
+    return s1;
+}
+
+SortedIntSet *ToIntersection(SortedIntSet *s1, const SortedIntSet *s2)
+{
+    int i = 0;
+
+    while(i < s1->num) {
+        if (IsMember(s2, s1->set[i]) == -1) {
+            Remove(s1, s1->set[i]);
+        } else {
+            i++;
+        }
+    }
+
+    return s1;
+}
+
+SortedIntSet *ToDifference(SortedIntSet *s1, const SortedIntSet *s2)
+{
+    int i;
+
+    for (i = 0; i <s2->num; i++) {
+        Remove(s1, s2->set[i]);
+    }
+
+    return s1;
+}
+
+int IsSubset(const SortedIntSet *s1, const SortedIntSet *s2) 
+{
+    int i, j;
+
+    for (i = 0; i < s1->num; i++) {
+        for (j = 0; j < s2->num; j++) {
+            if (s1->set[i] == s2->set[j]) {
+                break;
+            }
+        }
+
+        if (j == s2->num) {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
+int IsProperSubset (const SortedIntSet *s1, const SortedIntSet *s2)
+{
+    int i;
+
+    if (s1->num >= s2->num) {
+        return 0;
+    }
+
+    return IsSubset(s1, s2);
+}
+
+void Print(const SortedIntSet *s)
+{
+    int i;
+
+    printf("{");
+    for (i = o; i < s->num; i++) {
+        printf("%d ", s->set[i]);
+    }
+
+    printf("}");
+}
+
+void PrintLn(const SortedIntSet *s)
+{
+    Print(s);
+    putchar('¥n');
+}
+
+void Clear(SortedIntSet *s)
+{
+    s->num = 0;
+}
+
+void Terminate(SortedIntSet *s)
+{
+    if (s->set != NULL) {
+        free(s->set);
+        s->max = s->num = 0;
+    }
+}
