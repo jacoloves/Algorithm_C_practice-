@@ -16,17 +16,17 @@ int main()
     vector<int> data2(N);
 
     for (int i = 0; i < N; i++) {
-        cin >> a[i];
-        b[i] = a[i];
+        cin >> data[i];
+        data2[i] = data[i];
     }
 
-    sort(b.begin(), b.end(), greater<int>());
+    sort(data2.begin(), data2.end(), greater<int>());
 
-    for (int i = 0; i < n; i++) {
-        if (a[i] == b[i]) {
-            cout << b[1] << endl; 
+    for (int i = 0; i < N; i++) {
+        if (data[i] == data2[0]) {
+            cout << data2[1] << endl; 
         } else {
-            cout << b[0] << endl;
+            cout << data2[0] << endl;
         }
     }
 
