@@ -102,5 +102,6 @@ Token nextTkn(void)
             for (num=0; ctyp[ch]==Digit; ch=nextCh()) {
                 num = num*10 + (ch-'0');
             }
+            
     }
 }
