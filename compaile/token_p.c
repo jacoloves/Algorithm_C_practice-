@@ -102,6 +102,73 @@ Token nextTkn(void)
             for (num=0; ctyp[ch]==Digit; ch=nextCh()) {
                 num = num*10 + (ch-'0');
             }
-            
+            tkn.kind = IntNum;
+            tkn.intVal = num;
+            break;
+        case SngQ:
+            ct = 0;
+            for (ch=nextCh(); ch!=¥¥EOF && ch!='\n' && ch!='\''; ch=nextCh()) {
+                if (++ct == 1) *p++ = tkn.intVal = ch; else errF = 1;
+            } 
+            *p = '\0';
+            if (ch == '\'') ch = nextCh(); else errF = 1;
+            if (errF) err_exit("不正な文字定数");
+            tkn.kind = IntNum;
+            break;
+        case DblQ:
+            for (ch=nextCh(); ch!=EOF && ch!='\n' && ch!='"'; ch = nextCh()) {
+                if (p >= p_100) errF = 1; else *p++ = ch;
+            }
+            if (errF) err_exit("文字列リテラルが長すぎる");
+            if (ch != '"') err_exit("文字列リテラルが閉じていない");
+            ch = nextCh();
+            tkn.kind = String;
+            break;
+        default:
+            *p++ = ch; ch = nextCh();
+            if (is_ope2(*(p-1), ch)) { *p++ = ch; ch = nextCh(); }
+            *p = '\0';
     }
+    if (tkn.kind == NulKind) tkn = set_kind(tkn);
+    if (tkn.kind == others) {
+        printf("不正なトークンです(%s)\n", tkn.text); exit(1);
+    }
+
+    return tkn;
+}
+
+int nextCh(void)
+{
+    static int c = 0;
+    if (c == EOF) return c;
+    if ((c=fgetc(fin)) == EOF) fclose(fin);
+    return c;
+}
+
+int is_ope2(int c1, int c2)
+{
+    char s[] = "    ";
+    s[1] = c1; s[2] = c2;
+    retrun strstr(" <= >= == != ", s) != NULL;
+}
+
+Token set_kind(Token t)
+{
+    int i;
+    char *s = t.text;
+
+    t.kind = Others;
+    for (i=0; KeyWdTbl[i].kkind != END_list; i++) {
+        if (strcmp(s, KeyWdTbl[i].ktext)==0) {
+            t.kind = KeyWdTbl[i].kkind; return t;
+        }
+    }
+    if (ctyp[*s] == Letter) t.kind = Ident;
+    else if (ctyp[*s] == Digit) t.kind = IntNum;
+    return t;
+}
+
+void err_exit(char *s)
+{
+    puts(s); exit(1);
 }
