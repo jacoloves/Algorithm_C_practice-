@@ -8,9 +8,10 @@
 
 /* トークンの種類 */
 typedef enum {
-    LParen, RParen, Plus, Minus, Multi, Divi, Equal, NotEq,
-    Less, LessEq, Great, GreetEq, SngQ, DblQ, Assign, Semicolon,
-    If, Else, Puts, Ident, IntNum, END_list
+    Lparen, Rparen, Plus, Minus, Multi, Divi, Equal, NotEq,
+    Less, LessEq, Great, GreatEq, SngQ, DblQ, Assign, Semicolon,
+    If, Else, Puts, Ident, IntNum, 
+    String, Letter, Digit, NulKind, EofTkn, Others, END_list
 } Kind;
 
 #define ID_STZ 31 /* 識別子の長さ */
@@ -43,7 +44,7 @@ struct {
     {"(", Lparen}, {")", Rparen},
     {"+", Plus}, {"-", Minus},
     {"*", Multi}, {"/", Divi},
-    {"==", Equal}, {"!=", notEq},
+    {"==", Equal}, {"!=", NotEq},
     {"<", Less}, {"<=", LessEq},
     {">", Great}, {">=", GreatEq},
     {"=", Assign}, {";", Semicolon},
@@ -52,13 +53,13 @@ struct {
 
 int main(int argc, char *argv[])
 {
-    if (argc == q) exit(1);
+    if (argc == 1) exit(1);
     if ((fin=fopen(argv[1], "r")) == NULL) exit(1);
 
     printf("test    kind intVal\n");
     initChTyp();
     for (token = nextTkn(); token.kind != EofTkn; token = nextTkn()) {
-        printf("%-10s %3d %d\n", token.txt, token.kind, token.intVal);
+        printf("%-10s %3d %d\n", token.text, token.kind, token.intVal);
     }
 
     return 0;
@@ -70,13 +71,13 @@ void initChTyp(void)
 
     for (i=0; i < 256; i++) { ctyp[i] = Others;}
     for (i='0'; i <= '9'; i++) { ctyp[i] = Digit;}
-    for (i='A'; i <= 'Z'; i++) { ctyp[i] = Latter;}
-    for (i='a'; i <= 'z'; i++) { ctyp[i] = Latter;}
-    ctyp['_'] = Letter; ctyp["="] = Assign;
-    ctyp['('] = Lparen; ctyp[")"] = Rparen;
-    ctyp['<'] = Less; ctyp[">"] = Great;
-    ctyp['+'] = Plus; ctyp["-"] = Minus;
-    ctyp['*'] = Multi; ctyp["/"] = Divi;
+    for (i='A'; i <= 'Z'; i++) { ctyp[i] = Letter;}
+    for (i='a'; i <= 'z'; i++) { ctyp[i] = Letter;}
+    ctyp['_'] = Letter; ctyp['='] = Assign;
+    ctyp['('] = Lparen; ctyp[')'] = Rparen;
+    ctyp['<'] = Less; ctyp['>'] = Great;
+    ctyp['+'] = Plus; ctyp['-'] = Minus;
+    ctyp['*'] = Multi; ctyp['/'] = Divi;
     ctyp['\''] = SngQ; ctyp['"'] = DblQ;
     ctyp[';'] = Semicolon;
 }
@@ -93,7 +94,7 @@ Token nextTkn(void)
 
     switch (ctyp[ch]) {
         case Letter:
-            for ( ; ctyp[ch]==Letter; || ctyp[ch]==Digit; ch-=nextCh()) {
+            for ( ; ctyp[ch]==Letter || ctyp[ch]==Digit; ch-=nextCh()) {
                 if (p < p_31) *p++ = ch;
             }
             *p = '\n';
@@ -107,7 +108,7 @@ Token nextTkn(void)
             break;
         case SngQ:
             ct = 0;
-            for (ch=nextCh(); ch!=¥¥EOF && ch!='\n' && ch!='\''; ch=nextCh()) {
+            for (ch=nextCh(); ch!=EOF && ch!='\n' && ch!='\''; ch=nextCh()) {
                 if (++ct == 1) *p++ = tkn.intVal = ch; else errF = 1;
             } 
             *p = '\0';
@@ -130,7 +131,7 @@ Token nextTkn(void)
             *p = '\0';
     }
     if (tkn.kind == NulKind) tkn = set_kind(tkn);
-    if (tkn.kind == others) {
+    if (tkn.kind == Others) {
         printf("不正なトークンです(%s)\n", tkn.text); exit(1);
     }
 
@@ -149,7 +150,7 @@ int is_ope2(int c1, int c2)
 {
     char s[] = "    ";
     s[1] = c1; s[2] = c2;
-    retrun strstr(" <= >= == != ", s) != NULL;
+    return strstr(" <= >= == != ", s) != NULL;
 }
 
 Token set_kind(Token t)
