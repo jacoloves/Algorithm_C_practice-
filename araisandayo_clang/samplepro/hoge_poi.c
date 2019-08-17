@@ -2,8 +2,8 @@
 
 int main(void)
 {
-    int hoge;
-    int *hoge_p;
+    char hoge;
+    char *hoge_p;
 
     hoge_p = hoge;
 
