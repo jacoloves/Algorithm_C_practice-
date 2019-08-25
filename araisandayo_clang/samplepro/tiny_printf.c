@@ -22,7 +22,7 @@ void tiny_printf(char *format, ...)
     }
 
     va_end(ap);
-    putchar('\0');
+    putchar('\n');
 }
 
 int main(void)

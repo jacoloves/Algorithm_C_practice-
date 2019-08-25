@@ -27,7 +27,7 @@ typedef struct {
 void initChTyp(void);
 Token nextTkn(void);
 int nextCh(void);
-int is_ope(int c1, int c2);
+int is_ope2(int c1, int c2);
 Token set_kind(Token t);
 void err_exit(char *s);
 
@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
     if (argc == 1) exit(1);
     if ((fin=fopen(argv[1], "r")) == NULL) exit(1);
 
-    printf("test    kind intVal\n");
+    printf("text    kind intVal\n");
     initChTyp();
     for (token = nextTkn(); token.kind != EofTkn; token = nextTkn()) {
         printf("%-10s %3d %d\n", token.text, token.kind, token.intVal);
@@ -94,7 +94,7 @@ Token nextTkn(void)
 
     switch (ctyp[ch]) {
         case Letter:
-            for ( ; ctyp[ch]==Letter || ctyp[ch]==Digit; ch-=nextCh()) {
+            for ( ; ctyp[ch]==Letter || ctyp[ch]==Digit; ch=nextCh()) {
                 if (p < p_31) *p++ = ch;
             }
             *p = '\n';
@@ -120,6 +120,7 @@ Token nextTkn(void)
             for (ch=nextCh(); ch!=EOF && ch!='\n' && ch!='"'; ch = nextCh()) {
                 if (p >= p_100) errF = 1; else *p++ = ch;
             }
+            *p = '\"';
             if (errF) err_exit("文字列リテラルが長すぎる");
             if (ch != '"') err_exit("文字列リテラルが閉じていない");
             ch = nextCh();
