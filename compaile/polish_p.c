@@ -37,7 +37,7 @@ void polish(char *s)
   int wk;
   char *out = plsh_out;
 
-  stckt = 0;
+  stkct = 0;
   while(1) {
     while(isspace(*s)) { ++s; }
     if (*s == '\0') {
@@ -65,7 +65,7 @@ void polish(char *s)
         if (order(*s) == -1) {
           printf("不正な文字(%c)\n", *s); exit(1);
         }
-        while(stckt>0 && (order(stack[stkct]) >= order(*s))) {
+        while(stkct>0 && (order(stack[stkct]) >= order(*s))) {
           *out++ = pop();
         }
         push(*s);
@@ -75,7 +75,59 @@ void polish(char *s)
   *out = '\0';
 }
 
+int execute(void)
+{
+  int d1, d2;
+  char *s;
 
+  stkct = 0;
+  for (s=plsh_out; *s; s++) {
+    if (islower(*s))
+      push(getvalue(*s));
+    else if (isdigit(*s))
+      push(*s - '0');
+    else {
+      d2 = pop(); d1 = pop();
+      switch(*s) {
+        case '+': push(d1+d2); break;
+        case '-': push(d1-d2); break;
+        case '*': push(d1*d2); break;
+        case '/': if (d2 == 0) { puts("ゼロ除算"); exit(1); }
+                  push(d1/d2); break;
+      }
+    }
+  }
+  if (stkct != 1) { printf("error\n"); exit(1); }
+  return pop();
+}
+
+int getvalue(int ch)
+{
+  if (islower(ch)) return ch-'a' + 1;
+  return 0;
+}
+
+int order(int ch)
+{
+  switch(ch) {
+    case '*': case '/': return 3;
+    case '+': case '-': return 2;
+    case '(':           return 1;
+  }
+  return -1;
+}
+
+void push(int n)
+{
+  if (stkct+1 > STK_STZ) { puts("stack overflow"); exit(1); }
+  stack[++stkct] = n;
+}
+
+int pop(void)
+{
+  if (stkct < 1) { puts("stack underflow"); exit(1); }
+  return stack[stkct--];
+}
 
 
 
