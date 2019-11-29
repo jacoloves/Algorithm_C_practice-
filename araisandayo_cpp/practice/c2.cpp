@@ -10,24 +10,15 @@ typedef long long ll;
 using namespace std;
 
 int main() {
-	int a, flg = 0, ans = 0;
-
-	cin >> a;
-
-	for (int i = 1; i <= 9; i++) {
-		ans = a / i;
-		if (a == ( ans * i ) && ans > 0 && ans < 10  ) {
-			cout << "Yes" << endl;
-			break;
-		}
-
-		if (i == 9) {
-			flg = 1; 
-		}
-	}
-
-	if (flg == 1) {
-		cout << "No" << endl;
-	}
+	ll N;
+    cin >> N;
+    ll ans = N - 1;
+    for (ll i = 2; i * i <= N; i++) {
+        if (N % i == 0) {
+            ans = min(ans, i + N / i - 2);
+        }
+    }
+    cout << ans << "\n";
+    return 0;
 
 }
