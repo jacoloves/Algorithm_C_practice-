@@ -10,7 +10,7 @@ typedef long long ll;
 using namespace std;
 
 int main() {
-	int a;
+	int a, flg=0;
 	cin >> a;
 
 	if (a % 2 != 0) {
@@ -22,23 +22,31 @@ int main() {
 		int b = a / 2;
 
 		vector<char> data(b);
+		vector<char> data2(b);
 
-		for (int i = 0; i < b; i++) {
+		// T1のパーツ
+		for (int i  = 0; i < b; i++) {
 			data[i] = smp[i];
 		}
 
+		// T2のパーツ
+		int cnt = 0;
+		for (int i = b; i < a; i++) {
+			data2[cnt] = smp[i];
+			cnt++;
+		}
+
 		for (int i = 0; i < b; i++) {
-			data[b+i] = smp[i];
+			if (data[i] != data2[i]) {
+				flg = 1;
+				break;
+			}
 		}
 
-		for (int i = 0; i < a; i++) {
-			cout << data[i];
+		if (flg == 1) {
+			cout << "No" << endl;
+		} else {
+			cout << "Yes" << endl;
 		}
-
-		cout << endl;
-
 	}
-	
-
-
 }
