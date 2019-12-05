@@ -9,28 +9,46 @@ typedef long long ll;
 
 using namespace std;
 
-int N, X[8], Y[8];
-//---------------------------------------------------------------------------------------------------
-void _main() {
-    cin >> N;
-    rep(i, 0, N) cin >> X[i] >> Y[i];
-
-    vector<int> ord;
-    rep(i, 0, N) ord.push_back(i);
-
-    long double sm = 0;
-    do {
-        rep(i, 0, N - 1) {
-            int a = ord[i];
-            int b = ord[i + 1];
-
-            long double dx = X[a] - X[b];
-            long double dy = Y[a] - Y[b];
-
-            sm += sqrt(dx * dx + dy * dy);
+int a[8];
+bool flag[8];
+double ans = 0;
+double m;
+double x[8], y[8];
+int N;
+ 
+int fact(int n) {
+    if (n == 1) return 1;
+    return n * fact(n - 1);
+}
+ 
+double norm(double x1, double y1, double x2, double y2) {
+    return sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+}
+ 
+void perm(int n) {
+    if (n == N) {
+        for (int i = 0; i < N - 1; i++) {
+            ans += norm(x[a[i]], y[a[i]], x[a[i + 1]], y[a[i + 1]]) / m;
         }
-    } while (next_permutation(all(ord)));
-
-    rep(i, 0, N) sm /= (i + 1);
-    printf("%.10Lf\n", sm);
+        return;
+    }
+    for (int i = 0; i < N; i++) {
+        if (flag[i]) continue;
+        a[n] = i;
+        flag[i] = true;
+        perm(n + 1);
+        flag[i] = false;
+    }
+}
+ 
+int main() {
+    cin >> N;
+    for (int i = 0; i < N; i++) {
+        cin >> x[i] >> y[i];
+        flag[i] = false;
+    }
+    m = fact(N);
+    perm(0);
+    printf("%0.9f\n", ans);
+    return 0;
 }
