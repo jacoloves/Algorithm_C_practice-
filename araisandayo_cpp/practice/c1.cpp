@@ -4,51 +4,37 @@
 #include <algorithm>
 #include <cstdlib>
 #include <cmath>
+#include <iomanip>
 
 typedef long long ll;
 
 using namespace std;
 
-int a[8];
-bool flag[8];
-double ans = 0;
-double m;
-double x[8], y[8];
 int N;
+int x[10], y[10];
  
-int fact(int n) {
-    if (n == 1) return 1;
-    return n * fact(n - 1);
+double dist(int i, int j) {
+    double dx = x[i] - x[j];
+    double dy = y[i] - y[j];
+    return pow(dx * dx + dy * dy, 0.5);
 }
  
-double norm(double x1, double y1, double x2, double y2) {
-    return sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
-}
- 
-void perm(int n) {
-    if (n == N) {
-        for (int i = 0; i < N - 1; i++) {
-            ans += norm(x[a[i]], y[a[i]], x[a[i + 1]], y[a[i + 1]]) / m;
-        }
-        return;
-    }
-    for (int i = 0; i < N; i++) {
-        if (flag[i]) continue;
-        a[n] = i;
-        flag[i] = true;
-        perm(n + 1);
-        flag[i] = false;
-    }
+void solve() {
+    cin >> N;
+    for(int i = 1; i <= N; i++) cin >> x[i] >> y[i];
+    double sum = 0.0;
+    vector<int> v(N);
+    for(int i = 0; i < N; i++) v[i] = i + 1;
+    do {
+        for(int i = 0; i < N - 1; i++) sum += dist(v[i], v[i+1]);
+    } while(next_permutation(v.begin(), v.end()));
+    int Factorial = 1;
+    for(int i = 2; i <= N; i++) Factorial *= i;
+    cout << fixed << setprecision(10) << sum / Factorial << endl;
+    return;
 }
  
 int main() {
-    cin >> N;
-    for (int i = 0; i < N; i++) {
-        cin >> x[i] >> y[i];
-        flag[i] = false;
-    }
-    m = fact(N);
-    perm(0);
-    printf("%0.9f\n", ans);
+    solve();
     return 0;
 }
