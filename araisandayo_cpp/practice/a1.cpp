@@ -15,7 +15,7 @@ int main(void)
     string str;
 
     cin >> str;
-    int ans;
+    int ans = 0;
     if (str == "SUN") {
         ans = 7;
     } else if (str == "MON") {
@@ -24,5 +24,13 @@ int main(void)
         ans = 5;
     } else if (str == "WED") {
         ans = 4;
+    } else if (str == "THU") {
+        ans = 3;
+    } else if (str == "FRI") {
+        ans = 2;
+    } else if (str == "SAT") {
+        ans = 1;
     }
+
+    cout << ans << endl;
 }
