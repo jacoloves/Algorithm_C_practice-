@@ -12,7 +12,12 @@ using namespace std;
 
 int main(void)
 {
-    printf("test\n");
+    int a;
+    cin >> a;
 
-    return 0;
+    for (int i = 0; i < a; i++) {
+        cout << "*";
+    }
+
+    cout << endl;
 }

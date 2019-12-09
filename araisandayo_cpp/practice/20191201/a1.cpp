@@ -4,15 +4,17 @@
 #include <algorithm>
 #include <cstdlib>
 #include <cmath>
-#include <iomanip>
 
 typedef long long ll;
 
 using namespace std;
 
-int main(void)
-{
-    printf("test\n");
+int main() {
+    int a, ans;
+	cin >> a;
 
-    return 0;
+	ans = a*a;
+
+	cout << ans << endl;
+
 }
