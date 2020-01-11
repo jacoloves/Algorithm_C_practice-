@@ -1,0 +1,8 @@
+/**********************************/
+/*  filename:cci_pars.c 構文解析  */
+/*  CCI-C                         */
+/*  Authr: Shotaro Tanaka         */
+/**********************************/
+#include "cci.h"
+#include "cci_ FNCDECL();
+
