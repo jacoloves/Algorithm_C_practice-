@@ -27,6 +27,7 @@ int main() {
         ans += v[i] / pow(2.0, N - i);
     }
 
+    
     cout << ans << endl;
 
     return 0;
