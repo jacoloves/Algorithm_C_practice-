@@ -4,7 +4,9 @@
 #include <string.h>
 int main()
 {
-
+  char *name;
+  printf("Enter a name: ");
+  scanf("%s", name);
   return 0;
 }
 
